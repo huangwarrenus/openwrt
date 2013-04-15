@@ -328,6 +328,8 @@ Image/Build/Profile/RT-N13U=$(call BuildFirmware/Default8M/$(1),$(1),rt-n13u,RT-
 
 Image/Build/Profile/FREESTATION5=$(call BuildFirmware/Default8M/$(1),$(1),freestation5,FREESTATION5)
 
+Image/Build/Profile/M3=$(call BuildFirmware/Default4M/$(1),$(1),m3,M3)
+
 Image/Build/Profile/MOFI3500-3GN=$(call BuildFirmware/Default8M/$(1),$(1),mofi3500-3gn,MOFI3500-3GN)
 
 Image/Build/Profile/NBG-419N=$(call BuildFirmware/Default4M/$(1),$(1),nbg-419n,NBG-419N)
@@ -455,6 +457,7 @@ define Image/Build/Profile/Default
 	$(call Image/Build/Profile/FONERA20N,$(1))
 	$(call Image/Build/Profile/FREESTATION5,$(1))
 	$(call Image/Build/Profile/HW550-3G,$(1))
+	$(call Image/Build/Profile/M3,$(1))
 	$(call Image/Build/Profile/MOFI3500-3GN,$(1))
 	$(call Image/Build/Profile/MZKW300NH2,$(1))
 	$(call Image/Build/Profile/NBG-419N,$(1))

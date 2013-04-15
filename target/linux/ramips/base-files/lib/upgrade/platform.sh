@@ -41,6 +41,7 @@ platform_check_image() {
 	rt-n13u | \
 	freestation5 | \
 	hw550-3g | \
+	m3 | \
 	mofi3500-3gn | \
 	mzk-w300nh2 | \
 	nbg-419n | \
