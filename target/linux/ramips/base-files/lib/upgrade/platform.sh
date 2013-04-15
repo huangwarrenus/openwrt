@@ -41,6 +41,7 @@ platform_check_image() {
 	rt-n13u | \
 	freestation5 | \
 	hw550-3g | \
+	ip2202 | \
 	m3 | \
 	m4 | \
 	mofi3500-3gn | \
