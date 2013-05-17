@@ -1,0 +1,2 @@
+config CS1168
+	tristate "CS1168 ADC"
