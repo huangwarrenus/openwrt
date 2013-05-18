@@ -1,3 +1,14 @@
+//
+// Device tree definition for Poray X5 and X6 routers.
+//
+// This is free software, licensed under the GNU General Public License v2.
+// See /LICENSE for more information.
+//
+// -- Luis Soltero <lsoltero@globalmarinenet.com>
+// -- Michel Stempin <michel.stempin@wanadoo.fr>
+// -- Felix Kaechele <felix@fetzig.org>
+//
+
 /dts-v1/;
 
 /include/ "rt5350.dtsi"
@@ -87,6 +98,7 @@
 	wmac@10180000 {
 		status = "okay";
 		ralink,mtd-eeprom = <&factory 0>;
+                ralink,led-polarity = <1>;
 	};
 
 	ehci@101c0000 {
