@@ -1,0 +1,19 @@
+
+
+
+batlvl reads the battery voltage (requires the installation of the cs1168 package. this is a dependency) and then turns on the LEDs appropriately for 5 seconds.  When the battery voltage is less than 20% it blinks the 20% light rapidly for 5 seconds.  This lets the user know the battery is on its last legs.
+
+to use the batlvl app you need to bind it to the wps button (the name given to big button in the center of the LED ring).  here is a /etc/config/system entry that will do that.
+
+config button
+        option button 'wps'
+        option action 'released'
+        option handler '/usr/bin/batlvl'
+        option min '0'
+        option max '5'
+
+this entry depends on hotplug and the 00-button script as defined here
+http://wiki.openwrt.org/doc/howto/hardware.button 
+
+
+-- Luis Soltero <lsoltero@globalmarinenet.com>
