@@ -1,3 +1,53 @@
+//
+// Device tree definition for Poray X5 and X6 routers.  
+//
+// This is free software, licensed under the GNU General Public License v2.
+// See /LICENSE for more information.
+//
+// -- Luis Soltero <lsoltero@globalmarinenet.com>
+// -- Michel Stempin <michel.stempin@wanadoo.fr> 
+// -- Felix Kaechele <felix@fetzig.org>
+//
+//
+// this files add support for the programmable switch on the side of the router labled 3G-DHCP
+// 
+// the switch is defined as a button so events can be bound to it using hotplug.  The switch is bound to button BTN_0.
+//
+// GPIO /sys/class/gpio/usb-mode/value is used to map the X5 SD or USB port to the router.  When the ascii value '0' is
+// writen to the gpio the router maps the internal TF/SD drive to the USB interface on the SoC.  When ascii value '1' is
+// writen to the gpio the router maps the external USB port labled 3G-USB to the USB interfave on the SoC.
+//
+// To use the switch  you need to bind it to the BTN_0 button event in hotplug. Here is a /etc/config/system entry that will
+// do that.
+//
+// config button
+//        option button 'BTN_0'
+//        option action 'released'
+//        option handler 'echo 0 > /sys/class/gpio/usb-mode/value'
+//
+// config button
+//        option button 'BTN_0'
+//        option action 'pressed'
+//        option handler 'echo 1 > /sys/class/gpio/usb-mode/value'
+//
+// this entry depends on hotplug and the 00-button script as defined here
+// http://wiki.openwrt.org/doc/howto/hardware.button 
+//
+// FixMe:
+// On boot up the system needs to probe the state of the switch to initialize the USB mode correctly. This can be done by
+// parsing /sys/kernel/debug/gpio which returns
+// GPIOs 0-23, 10000600.gpio:
+// gpio-7   (x5:green:80         ) out hi
+// gpio-9   (bat                 ) in  hi
+// gpio-10  (reset               ) in  hi
+// gpio-11  (x5:green:50         ) out hi
+// gpio-12  (x5:green:20         ) out hi
+// gpio-13  (x5:green:power      ) out lo
+// gpio-14  (mode                ) in  lo
+// gpio-18  (usb-mode            ) out lo
+//
+// gpio-14 has a value of lo (0) when the switch is set to DHCP and hi(1) when set to USB.
+
 /dts-v1/;
 
 /include/ "rt5350.dtsi"
@@ -111,9 +161,27 @@
 		};
 	};
 
+        gpio_export {
+                compatible = "gpio-export";
+                #size-cells = <0>;
+
+//                usb-switch {
+//                        gpio-export,name = "usb-switch";
+//                        gpio-export,input = <0>;
+//                        gpios = <&gpio1 14 0>;
+//                };
+
+                usb-mode {
+                        gpio-export,name = "usb-mode";
+                        gpio-export,output = <0>;
+                        gpios = <&gpio0 18 0>;
+                };
+        };
+
 	wmac@10180000 {
 		status = "okay";
 		ralink,mtd-eeprom = <&factory 0>;
+		ralink,led-polarity = <1>;
 	};
 
 	ehci@101c0000 {
