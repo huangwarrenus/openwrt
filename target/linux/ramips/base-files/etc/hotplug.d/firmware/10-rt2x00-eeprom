@@ -88,6 +88,7 @@ case "$FIRMWARE" in
 	rt-n15 | \
 	rt-n56u | \
 	sl-r7205 | \
+	top-ap01 | \
 	v11st-fe | \
 	v22rw-2x2 | \
 	w306r-v20 | \

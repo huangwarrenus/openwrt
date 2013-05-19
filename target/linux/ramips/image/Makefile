@@ -355,6 +355,8 @@ Image/Build/Profile/RTN10PLUS=$(call BuildFirmware/Default4M/$(1),$(1),rt-n10-pl
 
 Image/Build/Profile/SL-R7205=$(call BuildFirmware/Default4M/$(1),$(1),sl-r7205,SL-R7205)
 
+Image/Build/Profile/TOPAP01=$(call BuildFirmware/Default8M/$(1),$(1),top-ap01,TOP-AP01)
+
 Image/Build/Profile/V22RW-2X2=$(call BuildFirmware/Default4M/$(1),$(1),v22rw-2x2,V22RW-2X2)
 
 Image/Build/Profile/W150M=$(call BuildFirmware/CustomFlashFactory/$(1),$(1),w150m,W150M,$(ralink_default_fw_size_4M),W150M Kernel Image,factory)
@@ -479,6 +481,7 @@ define Image/Build/Profile/Default
 	$(call Image/Build/Profile/RTN10PLUS,$(1))
 	$(call Image/Build/Profile/RT-N13U,$(1))
 	$(call Image/Build/Profile/SL-R7205,$(1))
+	$(call Image/Build/Profile/TOP-AP01,$(1))
 	$(call Image/Build/Profile/UR-326N4G,$(1))
 	$(call Image/Build/Profile/V22RW-2X2,$(1))
 	$(call Image/Build/Profile/W150M,$(1))

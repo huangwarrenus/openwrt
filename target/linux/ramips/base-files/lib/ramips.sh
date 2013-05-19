@@ -175,6 +175,9 @@ ramips_board_detect() {
 	*"V22RW-2X2")
 		name="v22rw-2x2"
 		;;
+	*"TopLink TOP-AP01")
+		name="top-ap01"
+		;;
 	*"W502U")
 		name="w502u"
 		;;

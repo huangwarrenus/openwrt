@@ -58,6 +58,7 @@ platform_check_image() {
 	sl-r7205 | \
 	tew-691gr | \
 	tew-692gr | \
+	top-ap01 | \
 	w306r-v20 |\
 	w502u |\
 	wr6202 |\
