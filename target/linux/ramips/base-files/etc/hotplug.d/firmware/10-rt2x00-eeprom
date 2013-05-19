@@ -105,6 +105,7 @@ case "$FIRMWARE" in
 	ur-326n4g | \
 	ur-336un | \
 	x5 | \
+	x8 | \
 	xdxrn502j)
 		rt2x00_eeprom_extract "factory" 0 272
 		;;
