@@ -76,6 +76,7 @@ case "$FIRMWARE" in
 	freestation5 | \
 	hw550-3g | \
 	m3 | \
+	m4 | \
 	mofi3500-3gn | \
 	pwh2004 | \
 	nbg-419n | \
