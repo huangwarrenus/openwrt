@@ -172,6 +172,7 @@ ramips_setup_macs()
 	dir-620-d1 | \
 	f5d8235-v1 | \
 	ip2202 | \
+	mpr-a1 | \
 	mzk-w300nh2 | \
 	nw718 | \
 	psr-680w | \

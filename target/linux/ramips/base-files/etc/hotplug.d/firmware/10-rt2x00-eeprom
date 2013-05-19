@@ -79,6 +79,7 @@ case "$FIRMWARE" in
 	m3 | \
 	m4 | \
 	mofi3500-3gn | \
+	mpr-a1 | \
 	pwh2004 | \
 	nbg-419n | \
 	nw718 | \

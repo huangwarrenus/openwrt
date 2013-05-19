@@ -97,6 +97,9 @@ ramips_board_detect() {
 	*"F5D8235 v2")
 		name="f5d8235-v2"
 		;;
+	*"Hame MPR-A1")
+		name="mpr-a1"
+		;;
 	*"Hauppauge Broadway")
 		name="broadway"
 		;;
