@@ -75,6 +75,7 @@ case "$FIRMWARE" in
 	rt-n13u | \
 	freestation5 | \
 	hw550-3g | \
+	m3 | \
 	mofi3500-3gn | \
 	pwh2004 | \
 	nbg-419n | \
