@@ -11,6 +11,19 @@
 //
 // this files add support for the programmable switch on the side of the router labled 3G-DHCP
 // 
+//
+// Notes on interfacing with the X5/X6 3G-DHCP switch
+//
+// there are two methods for interfacing with the 3G-DHCP/Switch. These are
+// A. Button
+// B. Polled
+//
+// To enable/disable the appropriate method search for COMMENT and comment/uncomppent the 
+// appropriate definitions.  Note that both can not be enabled at the same time.  The switch
+// can be defined as either a button or a exported GPIO but not both.
+//
+// A. Button Method
+//
 // the switch is defined as a button so events can be bound to it using hotplug.  The switch is bound to button BTN_0.
 //
 // GPIO /sys/class/gpio/usb-mode/value is used to map the X5 SD or USB port to the router.  When the ascii value '0' is
@@ -47,6 +60,27 @@
 // gpio-18  (usb-mode            ) out lo
 //
 // gpio-14 has a value of lo (0) when the switch is set to DHCP and hi(1) when set to USB.
+//
+// B. Polled Method
+//
+// the switch state is exported as GPIO 14 with name "usb-switch".  It can be accessed using the following path
+// /sys/class/gpio/usb-switch/value.  A value of 1 means that the switch is in 3G mode. A value of 0 means
+// that DHCP is selected.  A script or program must be written which polls the state of the GPIO and then
+// writes to GPIO 18 when the state changes.  Something like the following should work
+//
+// #!/bin/sh
+// newstate=`cat /sys/class/gpio/usb-switch/value`
+// curstate=""
+// while [ 1 ] ; do
+//    if [ "$currstate" -ne "$newstate" ]; then
+//        $curstate=$newstate;
+//        echo "$newstate" > /sys/class/gpio/usb-mode/value
+//    fi;
+//    sleep 2
+//    newstate=`cat /sys/class/gpio/usb-switch/value`
+// done
+// 
+// the script can be executed from /etc/init.d/
 
 /dts-v1/;
 
@@ -155,22 +189,34 @@
 			linux,code = <0x198>;
 		};
 
+//
+// 3G-DHCP Switch BUTTON method
+//
+// Comment this out (thrugh END COMMENT) when using BUTTON Method
 		mode {
 			label = "mode";
 			gpios = <&gpio0 14 1>;
 			linux,code = <0x100>;
 		};
+// END COMMENT
+//
 	};
 
         gpio_export {
                 compatible = "gpio-export";
                 #size-cells = <0>;
 
+//
+// 3G-DHCP Switch POLL Method
+//
+// Uncomment this out (through END COMMENT) when using the POLLED Method
 //                usb-switch {
 //                        gpio-export,name = "usb-switch";
 //                        gpio-export,input = <0>;
 //                        gpios = <&gpio1 14 0>;
 //                };
+// END COMMENT
+//
 
                 usb-mode {
                         gpio-export,name = "usb-mode";
