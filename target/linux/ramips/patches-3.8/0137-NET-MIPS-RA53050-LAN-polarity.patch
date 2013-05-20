@@ -1,0 +1,53 @@
+--- a/drivers/net/ethernet/ramips/ramips_esw.c	2013-05-20 17:12:01.000000000 -0400
++++ b/drivers/net/ethernet/ramips/ramips_esw.c	2013-05-20 17:24:06.000000000 -0400
+@@ -48,6 +48,8 @@
+ #define RT305X_ESW_REG_P3PC		0xf4
+ #define RT305X_ESW_REG_P4PC		0xf8
+ #define RT305X_ESW_REG_P5PC		0xfc
++/* RT5350 only registers */
++#define RT305X_EWS_REG_LED_POLARITY     0x168
+ 
+ #define RT305X_ESW_LED_LINK		0
+ #define RT305X_ESW_LED_100M		1
+@@ -401,6 +403,8 @@
+ 	int i;
+ 	u8 port_disable = 0;
+ 	u8 port_map = RT305X_ESW_PMAP_LLLLLL;
++	unsigned int led_polarity = 1;
++	struct device_node *np = esw->dev->of_node;
+ 
+ 	/* vodoo from original driver */
+ 	rt305x_esw_wr(esw, 0xC8A07850, RT305X_ESW_REG_FCT0);
+@@ -457,6 +461,12 @@
+ 	rt305x_esw_wr(esw, 0x00000005, RT305X_ESW_REG_P3LED);
+ 	rt305x_esw_wr(esw, 0x00000005, RT305X_ESW_REG_P4LED);
+ 
++	/* Force Link polarity on ports */
++	if (!of_property_read_u32(np, "ralink,led-polarity", &led_polarity)) {
++		rt305x_esw_wr(esw,led_polarity & 0x1F, RT305X_EWS_REG_LED_POLARITY);
++	}
++
++
+ 	/* Copy disabled port configuration from bootloader setup */
+ 	port_disable = rt305x_esw_get_port_disable(esw);
+ 	for (i = 0; i < 6; i++)
+@@ -554,6 +564,8 @@
+ 	u8 doubletag = 0;
+ 	u8 en_vlan = 0;
+ 	u8 untag = 0;
++	unsigned int led_polarity = 1;
++	struct device_node *np = esw->dev->of_node;
+ 
+ 	for (i = 0; i < RT305X_ESW_NUM_VLANS; i++) {
+ 		u32 vid, vmsc;
+@@ -568,6 +580,10 @@
+ 		rt305x_esw_set_vmsc(esw, i, vmsc);
+ 	}
+ 
++	if (!of_property_read_u32(np, "ralink,led-polarity", &led_polarity)) {
++		rt305x_esw_wr(esw,led_polarity & 0x1F, RT305X_EWS_REG_LED_POLARITY);
++	}
++
+ 	for (i = 0; i < RT305X_ESW_NUM_PORTS; i++) {
+ 		u32 pvid;
+ 		disable |= esw->ports[i].disable << i;
