@@ -111,6 +111,7 @@
 	esw@10110000 {
 		status = "okay";
 		ralink,portmap = <0x2f>;
+		ralink,led-polarity = <1>;
 	};
 
 	gpio-leds {
