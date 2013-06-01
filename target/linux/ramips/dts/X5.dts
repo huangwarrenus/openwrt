@@ -193,11 +193,11 @@
 // 3G-DHCP Switch BUTTON method
 //
 // Comment this out (thrugh END COMMENT) when using BUTTON Method
-		mode {
-			label = "mode";
-			gpios = <&gpio0 14 1>;
-			linux,code = <0x100>;
-		};
+//		mode {
+//			label = "mode";
+//			gpios = <&gpio0 14 1>;
+//			linux,code = <0x100>;
+//		};
 // END COMMENT
 //
 	};
@@ -210,11 +210,11 @@
 // 3G-DHCP Switch POLL Method
 //
 // Uncomment this out (through END COMMENT) when using the POLLED Method
-//                usb-switch {
-//                        gpio-export,name = "usb-switch";
-//                        gpio-export,input = <0>;
-//                        gpios = <&gpio1 14 0>;
-//                };
+                usb-switch {
+                        gpio-export,name = "usb-switch";
+                        gpio-export,input = <0>;
+                        gpios = <&gpio0 14 0>;
+                };
 // END COMMENT
 //
 
